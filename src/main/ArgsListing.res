@@ -104,7 +104,7 @@ let getMP3URL: string => promise<string> = argPageURL => {
 let listArgs: () => promise<Js.Array.t<arg>> = () => {
   listIndexPage()->then(entries => {
     Promise.resolve(entries->Js.Array2.map(entry => {
-      let mp3URL = safeMP3URL(entry.pageURL, entry.caption)
+      let mp3URL = entry.pageURL
       {
         caption: entry.caption,
         date: entry.date,
