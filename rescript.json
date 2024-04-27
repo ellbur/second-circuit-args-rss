@@ -15,10 +15,11 @@
   "package-specs": {
     "module": "es6"
   },
-  "suffix": ".res.mjs",
+  "suffix": ".mjs",
   "bs-dependencies": [
     "@rescript/core",
-    "rescript-nodejs"
+    "rescript-nodejs",
+    "@jmagaram/rescript-seq"
   ],
   "bs-dev-dependencies": [
   ],

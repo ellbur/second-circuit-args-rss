@@ -6,14 +6,7 @@ let log = Js.Console.log
 let x = Belt.Option.getExn
 type promise<'a> = Promise.t<'a>
 open Model
-
-type htmlElement = {
-  text: string
-}
-@module("node-html-parser") external parseHTML: string => htmlElement = "parse"
-@send external getElementsByTagName: (htmlElement, string) => array<htmlElement> = "getElementsByTagName"
-@send external querySelectorAll: (htmlElement, string) => array<htmlElement> = "querySelectorAll"
-@send external getAttribute: (htmlElement, string) => string = "getAttribute"
+open NodeHTMLParser
 
 let tableURL = ""
 let userAgent = "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"

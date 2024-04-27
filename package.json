@@ -5,11 +5,13 @@
   "type": "module",
   "dependencies": {
     "@google-cloud/functions-framework": "^3.0.0",
+    "@jmagaram/rescript-seq": "^4.4.1",
+    "@rescript/core": "^1.1.0",
     "axios": "1.6.5",
-    "xml2js": "0.4.23",
     "node-html-parser": "5.3.3",
-    "@rescript/core": "0.6.0",
-    "rescript-nodejs": "16.0.0"
+    "parse5": "^7.1.2",
+    "rescript-nodejs": "16.0.0",
+    "xml2js": "0.4.23"
   },
   "main": "lib/es6/src/main/Index.res.mjs",
   "scripts": {
@@ -19,6 +21,6 @@
     "build": "npm run build:rs"
   },
   "devDependencies": {
-    "rescript": "11.0.0"
+    "rescript": "^11.0.1"
   }
 }

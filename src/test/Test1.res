@@ -1,5 +1,6 @@
 
 open ArgsListing
+open NodeHTMLParser
 
 @get external outerHTML: htmlElement => string = "outerHTML"
 

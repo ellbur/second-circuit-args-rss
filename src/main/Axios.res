@@ -17,7 +17,8 @@ type opts<'a> = {
 module Axios = {
   module Default = {
     type t = {
-      "get": 't 'a. (string, opts<'a>) => promise<axiosResponse<'t>>
+      "get": 't 'a. (string, opts<'a>) => promise<axiosResponse<'t>>,
+      "post": 't 'a. (string, string, opts<'a>) => promise<axiosResponse<'t>>
     }
   }
   
@@ -29,4 +30,6 @@ module Axios = {
 @module external axios: Axios.t = "axios"
 
 let get: 't 'a. (string, opts<'a>) => promise<axiosResponse<'t>> = (url, opts) => axios["default"]["get"](url, opts)
+
+let post: 't 'a. (string, string, opts<'a>) => promise<axiosResponse<'t>> = (url, payload, opts) => axios["default"]["post"](url, payload, opts)
 
