@@ -2,6 +2,7 @@
 type arg = {
   caption: string,
   date: Js.Date.t,
-  mp3URL: string
+  mp3URL: string,
+  guid: string
 }
 

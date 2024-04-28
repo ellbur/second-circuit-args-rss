@@ -60,6 +60,23 @@ let recognizeArgTable: Parse5.element => option<argTable> = table =>
     }
   })
 
+let makeGUID = (~mp3RelativeURL: string, ~caption: string, ~dateMDYString: string) => {
+  let fixedMP3RelativeURL = {
+    // /decisions/isysquery/1a402dba-08bd-4cc0-b264-e89dcac66e5a/1/doc/23-6344.mp3
+    switch Re.exec(%re("/^(.*\bisysquery\/).*?\/.*?\/(.*)$/"), mp3RelativeURL) {
+      | Some(m) => {
+        switch m->Re.Result.matches {
+          | [before, after] => `${before}${after}`
+          | _ => ""
+        }
+      }
+      | None => ""
+    }
+  }
+  
+  `${fixedMP3RelativeURL}/${caption}/${dateMDYString}`
+}
+  
 let argTableToArg: (string, argTable) => option<Model.arg> = (baseURL, {mp3RelativeURL, caption, dateMDYString}) => {
   Re.exec(%re("/(\d+)\-(\d+)\-(\d+)/"), dateMDYString)->Option.flatMap(dateMatch => {
     switch dateMatch->Re.Result.matches {
@@ -75,7 +92,8 @@ let argTableToArg: (string, argTable) => option<Model.arg> = (baseURL, {mp3Relat
         Some({
           Model.caption: caption,
           date,
-          mp3URL
+          mp3URL,
+          Model.guid: makeGUID(~mp3RelativeURL, ~caption, ~dateMDYString)
         })
       }
       | _ => None
