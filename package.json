@@ -12,7 +12,7 @@
     "rescript-nodejs": "16.0.0",
     "xml2js": "0.4.23"
   },
-  "main": "lib/es6/src/main/Index.res.mjs",
+  "main": "lib/es6/src/main/Index.mjs",
   "scripts": {
     "build:rs": "rescript build",
     "clean:rs": "rescript clean",
