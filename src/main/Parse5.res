@@ -13,14 +13,18 @@ module Element = {
   @get external nodeName: t => string = "nodeName"
   @get external tagName: t => string = "tagName"
   @get external attrs: t => array<attr> = "attrs"
-  @get external childNodes: t => array<t> = "childNodes"
+  @get external childNodes: t => option<array<t>> = "childNodes"
+  @get external value: t => option<string> = "value"
   
   let childrenWithTag: (t, string) => array<t> = (el, tag) =>
-    el->childNodes->Array.filter(ch => ch->tagName == tag)
+    el->childNodes->Option.map(c => c->Array.filter(ch => ch->tagName == tag))->Option.getOr([])
+    
+  let childrenWithNodeName: (t, string) => array<t> = (el, name) =>
+    el->childNodes->Option.map(c => c->Array.filter(ch => ch->nodeName == name))->Option.getOr([])
     
   let rec walkTree: t => seq<t> = el => Seq.cons(
     el,
-    Seq.flatten(Seq.fromArray(el->childNodes->Array.map(walkTree)))
+    Seq.flatten(Seq.fromArray(el->childNodes->Option.map(c => c->Array.map(walkTree))->Option.getOr([])))
   )
     
   let elementByTagName: (t, string) => option<t> = (el, tag) =>
@@ -38,4 +42,5 @@ module Document = {
 type document = Document.t
 
 @module("parse5") external parse: string => document = "parse"
+@module("parse5") external serialize: Element.t => string = "serialize"
 

@@ -1,6 +1,5 @@
 
 let listArgs = ArgsListing.listArgs
-let getMP3URL = ArgsListing.getMP3URL
 let generateRSS = RSSGeneration.generateRSS
 let log = Js.Console.log
 let x = Belt.Option.getExn
