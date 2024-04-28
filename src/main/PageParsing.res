@@ -66,7 +66,7 @@ let argTableToArg: (string, argTable) => option<Model.arg> = (baseURL, {mp3Relat
       | [sMonth, sDay, sYear] => {
         let month1Based = sMonth->Int.fromString->x
         let day1Based = sDay->Int.fromString->x
-        let year = sYear->Int.fromString->x
+        let year = (sYear->Int.fromString->x) + 2000
         
         let date = Js.Date.makeWithYMD(~year=year->Int.toFloat, ~month=(month1Based-1)->Int.toFloat, ~date=day1Based->Int.toFloat, ())
         
