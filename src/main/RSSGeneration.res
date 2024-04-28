@@ -12,7 +12,8 @@ type rss = {
       "item": array<{
         "title": string,
         "link": string,
-        "pubDate": string
+        "pubDate": string,
+        "guid": string
       }>
     }
   }
@@ -37,7 +38,8 @@ let generateRSS = args => {
         {
           "title": arg.caption,
           "link": arg.mp3URL,
-          "pubDate": arg.date->Js.Date.toUTCString
+          "pubDate": arg.date->Js.Date.toUTCString,
+          "guid": arg.guid
         }
       })
     }
