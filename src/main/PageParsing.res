@@ -63,9 +63,9 @@ let recognizeArgTable: Parse5.element => option<argTable> = table =>
 let makeGUID = (~mp3RelativeURL: string, ~caption: string, ~dateMDYString: string) => {
   let fixedMP3RelativeURL = {
     // /decisions/isysquery/1a402dba-08bd-4cc0-b264-e89dcac66e5a/1/doc/23-6344.mp3
-    switch Re.exec(%re("/^(.*\bisysquery\/).*?\/.*?\/(.*)$/"), mp3RelativeURL) {
+    switch RegExp.exec(%re("/^(.*\bisysquery\/).*?\/.*?\/(.*)$/"), mp3RelativeURL) {
       | Some(m) => {
-        switch m->Re.Result.matches {
+        switch m->RegExp.Result.matches {
           | [before, after] => `${before}${after}`
           | _ => ""
         }
@@ -78,8 +78,8 @@ let makeGUID = (~mp3RelativeURL: string, ~caption: string, ~dateMDYString: strin
 }
   
 let argTableToArg: (string, argTable) => option<Model.arg> = (baseURL, {mp3RelativeURL, caption, dateMDYString}) => {
-  Re.exec(%re("/(\d+)\-(\d+)\-(\d+)/"), dateMDYString)->Option.flatMap(dateMatch => {
-    switch dateMatch->Re.Result.matches {
+  RegExp.exec(%re("/(\d+)\-(\d+)\-(\d+)/"), dateMDYString)->Option.flatMap(dateMatch => {
+    switch dateMatch->RegExp.Result.matches {
       | [sMonth, sDay, sYear] => {
         let month1Based = sMonth->Int.fromString->x
         let day1Based = sDay->Int.fromString->x
